@@ -38,10 +38,8 @@
 
 // Faça os ítens de 1 a 3 no arquivo tests/restaurant.spec.js
 
-// 4: Crie uma função `createMenu()` que, recebendo um objeto como parâmetro, retorna esse objeto no seguinte formato: 
+// 4: Crie uma função `createMenu()` que, recebendo um objeto como parâmetro, retorna esse objeto no seguinte formato:
 //  { fetchMenu: () => objetoPassadoPorParametro }.
-
-const createMenu = () => {};
 
 // Faça o item 5 no arquivo tests/restaurant.spec.js
 
@@ -62,5 +60,41 @@ const createMenu = () => {};
 // - fará a soma do preço desses itens;
 // - retornará o valor somado acrescido de 10%.
 // DICA: para isso, você precisará percorrer tanto o objeto da chave `food` quanto o objeto da chave `drink`.
+const createMenu = ({ food, drink }) => {
+  const consumptionMark = [];
+  return {
+    fetchMenu: () => ({ food, drink }),
+    consumption: consumptionMark,
+    order: (nextOrder) => {
+      if (Object.hasOwnProperty.call(food, nextOrder) || Object.hasOwnProperty.call(drink, nextOrder)) {
+        consumptionMark.push(nextOrder);
+      } else {
+        throw new Error('Item indisponível');
+      }
+    },
+    pay: () => {
+      let total = 0;
+      const foodList = Object.keys(food);
+      const drinkList = Object.keys(drink);
+      foodList.forEach((element) => {
+        const actualFoodAmount = consumptionMark.filter((actualfood) => actualfood === element);
+        total += actualFoodAmount.length * food[element];
+      });
+      drinkList.forEach((element) => {
+        const actualDrinkAmount = consumptionMark.filter((actualDrink) => actualDrink === element);
+        total += actualDrinkAmount.length * drink[element];
+      });
+      return total * 1.1;
+    },
+  };
+};
 
+/* const newMenu = createMenu({
+  food: { coxinha: 5.5, risoles: 6.0 },
+  drink: { coca: 3.5, soda: 9.0 },
+});
+newMenu.order("coxinha");
+newMenu.order("coxinha");
+newMenu.order("coca");
+(console.log(newMenu.pay())); */
 module.exports = createMenu;
