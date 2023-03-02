@@ -66,7 +66,8 @@ const createMenu = ({ food, drink }) => {
     fetchMenu: () => ({ food, drink }),
     consumption: consumptionMark,
     order: (nextOrder) => {
-      if (Object.hasOwnProperty.call(food, nextOrder) || Object.hasOwnProperty.call(drink, nextOrder)) {
+      if (Object.hasOwnProperty.call(food, nextOrder)
+      || Object.hasOwnProperty.call(drink, nextOrder)) {
         consumptionMark.push(nextOrder);
       } else {
         throw new Error('Item indisponível');
