@@ -89,12 +89,4 @@ const createMenu = ({ food, drink }) => {
   };
 };
 
-/* const newMenu = createMenu({
-  food: { coxinha: 5.5, risoles: 6.0 },
-  drink: { coca: 3.5, soda: 9.0 },
-});
-newMenu.order("coxinha");
-newMenu.order("coxinha");
-newMenu.order("coca");
-(console.log(newMenu.pay())); */
 module.exports = createMenu;
